@@ -1,0 +1,264 @@
+{
+  "meta": {
+    "titleSmall": "My Trip",
+    "titleMain": "曼谷之旅",
+    "dateRange": "4月2日 至 4月7日",
+    "outbound": {
+      "date": "4月2日",
+      "flight": "CX617",
+      "route": "香港 至 曼谷",
+      "time": "22:15 起飛  00:10 抵達"
+    },
+    "inbound": {
+      "date": "4月7日",
+      "flight": "CX702",
+      "route": "曼谷 至 香港",
+      "time": "19:15 起飛  23:05 抵達"
+    },
+    "footerNote": "行程  天氣  以當地時間顯示  餐廳與景點已分開標示",
+    "tripStartIso": "2026-04-02",
+    "tripEndIso": "2026-04-07",
+    "weather": {
+      "title": "曼谷天氣（自動更新）",
+      "latitude": 13.7563,
+      "longitude": 100.5018,
+      "timezone": "Asia/Bangkok",
+      "timezoneLabel": "泰國時間"
+    }
+  },
+  "days": [
+    {
+      "label": "Day 1",
+      "date": "4月2日",
+      "title": "出發前往曼谷",
+      "subtitle": "晚機出發",
+      "isoDate": "2026-04-02",
+      "items": [
+        {
+          "time": "22:15",
+          "icon": "✈️",
+          "title": "CX617 起飛",
+          "note": "香港 → 曼谷  預計 00:10 抵達"
+        }
+      ]
+    },
+    {
+      "label": "Day 2",
+      "date": "4月3日",
+      "title": "市區兌換店  Central World  按摩  Buffet",
+      "subtitle": "Super Rich  水門雞飯  Central World  龍眼冰  Health Land  Copper Buffet  Big C",
+      "isoDate": "2026-04-03",
+      "items": [
+        {
+          "time": "11:00",
+          "icon": "💱",
+          "title": "Super Rich",
+          "note": ""
+        },
+        {
+          "time": "11:30",
+          "icon": "🍽️",
+          "title": "水門雞飯",
+          "note": ""
+        },
+        {
+          "time": "13:00",
+          "icon": "🛍️",
+          "title": "Central World",
+          "note": ""
+        },
+        {
+          "time": "15:00",
+          "icon": "🍽️",
+          "title": "龍眼冰 @ SWU",
+          "note": ""
+        },
+        {
+          "time": "16:30",
+          "icon": "💆",
+          "title": "Health Land",
+          "note": ""
+        },
+        {
+          "time": "19:30",
+          "icon": "🍽️",
+          "title": "Copper Buffet",
+          "note": ""
+        },
+        {
+          "time": "21:00",
+          "icon": "🛒",
+          "title": "Big C",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "label": "Day 3",
+      "date": "4月4日",
+      "title": "老城區  打卡位  唐人街",
+      "subtitle": "Tek Heng 符德興  Space & Time Cube+  Chinatown  Som Som Seafood",
+      "isoDate": "2026-04-04",
+      "items": [
+        {
+          "time": "11:00",
+          "icon": "🚇",
+          "title": "移動時間",
+          "note": "前往午餐地點"
+        },
+        {
+          "time": "11:30",
+          "icon": "🍽️",
+          "title": "Tek Heng 符德興",
+          "note": ""
+        },
+        {
+          "time": "13:00",
+          "icon": "🚇",
+          "title": "移動時間",
+          "note": "前往 Space & Time Cube+"
+        },
+        {
+          "time": "14:00",
+          "icon": "📸",
+          "title": "Space & Time Cube+",
+          "note": ""
+        },
+        {
+          "time": "16:00",
+          "icon": "🚇",
+          "title": "移動時間",
+          "note": "前往 Chinatown"
+        },
+        {
+          "time": "18:00",
+          "icon": "🏮",
+          "title": "Chinatown",
+          "note": ""
+        },
+        {
+          "time": "19:00",
+          "icon": "🍽️",
+          "title": "Som Som Seafood",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "label": "Day 4",
+      "date": "4月5日",
+      "title": "週末市場  船麵  Siam",
+      "subtitle": "榮泰  JJ Market  Boat Noodle  Siam",
+      "isoDate": "2026-04-05",
+      "items": [
+        {
+          "time": "11:30",
+          "icon": "🍽️",
+          "title": "榮泰",
+          "note": ""
+        },
+        {
+          "time": "12:30",
+          "icon": "🚇",
+          "title": "移動時間",
+          "note": "前往 JJ Market"
+        },
+        {
+          "time": "15:00",
+          "icon": "🛍️",
+          "title": "JJ Market",
+          "note": ""
+        },
+        {
+          "time": "18:00",
+          "icon": "🚇",
+          "title": "移動時間",
+          "note": "前往船麵及 Siam"
+        },
+        {
+          "time": "19:00",
+          "icon": "🍽️",
+          "title": "Boat noodle",
+          "note": ""
+        },
+        {
+          "time": "20:00",
+          "icon": "🛍️",
+          "title": "Siam",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "label": "Day 5",
+      "date": "4月6日",
+      "title": "Icon Siam  海鮮 Buffet  Terminal 21",
+      "subtitle": "Icon Siam  EASY! Buddy  Kodtalay Seafood Buffet  Terminal 21",
+      "isoDate": "2026-04-06",
+      "items": [
+        {
+          "time": "11:00",
+          "icon": "🛍️",
+          "title": "Icon Siam",
+          "note": ""
+        },
+        {
+          "time": "12:00",
+          "icon": "🍽️",
+          "title": "EASY! Buddy",
+          "note": ""
+        },
+        {
+          "time": "15:00",
+          "icon": "🛍️",
+          "title": "Icon Siam",
+          "note": ""
+        },
+        {
+          "time": "17:00",
+          "icon": "🍽️",
+          "title": "Kodtalay Seafood Buffet",
+          "note": ""
+        },
+        {
+          "time": "20:00",
+          "icon": "🛒",
+          "title": "Terminal 21",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "label": "Day 6",
+      "date": "4月7日",
+      "title": "最後購物  回程",
+      "subtitle": "Siam  前往機場  CX702",
+      "isoDate": "2026-04-07",
+      "items": [
+        {
+          "time": "13:00",
+          "icon": "🛍️",
+          "title": "Siam",
+          "note": ""
+        },
+        {
+          "time": "18:00",
+          "icon": "🚖",
+          "title": "前往機場",
+          "note": "Siam 前往機場  建議預留充足時間"
+        },
+        {
+          "time": "19:15",
+          "icon": "✈️",
+          "title": "CX702 起飛",
+          "note": "曼谷 → 香港  預計 23:05 抵達"
+        }
+      ]
+    }
+  ],
+  "snacks": {
+    "title": "小食清單",
+    "subtitle": "路過即食  不設時間",
+    "items": []
+  }
+}
