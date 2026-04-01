@@ -56,7 +56,7 @@
           "time": "11:00",
           "icon": "💱",
           "title": "Super Rich",
-          "note": "",
+          "note": "先處理換匯，之後行街同食飯會順手好多",
           "popup": true,
           "detail": "到市區先處理換匯，之後行程會更順。可留意分店營業時間及即日匯率。",
           "maps": "https://www.google.com/maps/search/?api=1&query=SuperRich%20Thailand%20CentralWorld%20Bangkok"
@@ -65,7 +65,7 @@
           "time": "11:30",
           "icon": "🍽️",
           "title": "水門雞飯",
-          "note": "",
+          "note": "人氣海南雞飯，呢餐算係正式開局",
           "popup": true,
           "detail": "經典曼谷人氣雞飯，適合作為第一餐。通常午市較熱鬧，早少少到會舒服啲。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Go-Ang%20Pratunam%20Chicken%20Rice%20Bangkok"
@@ -74,7 +74,7 @@
           "time": "13:00",
           "icon": "🛍️",
           "title": "Central World",
-          "note": "",
+          "note": "大型商場，行街購物同順路補貨都方便",
           "popup": true,
           "detail": "大型商場，方便集中購物、休息及順路補貨。亦可按體力靈活調整停留時間。",
           "maps": "https://www.google.com/maps/search/?api=1&query=CentralWorld%20Bangkok"
@@ -83,7 +83,7 @@
           "time": "15:00",
           "icon": "🍽️",
           "title": "龍眼冰 @ SWU",
-          "note": "",
+          "note": "食個甜品休息一下，順便降溫",
           "popup": true,
           "detail": "中段食甜品降溫，作為 shopping break 幾合適。可當作短暫休息站。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Srinakharinwirot%20University%20Bangkok%20longan%20dessert"
@@ -92,7 +92,7 @@
           "time": "16:30",
           "icon": "💆",
           "title": "Health Land",
-          "note": "",
+          "note": "按摩放鬆，幫雙腳做風險管理",
           "popup": true,
           "detail": "下午安排按摩放鬆雙腳，幫身體回一回氣，之後再食 buffet 會舒服好多。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Health%20Land%20Asoke%20Bangkok"
@@ -101,7 +101,7 @@
           "time": "19:30",
           "icon": "🍽️",
           "title": "Copper Buffet",
-          "note": "",
+          "note": "自助晚餐，建議留肚入場",
           "popup": true,
           "detail": "人氣 buffet，建議準時到達。可預留充足用餐時間，唔好安排得太趕。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Copper%20Beyond%20Buffet%20Bangkok"
@@ -110,7 +110,7 @@
           "time": "21:00",
           "icon": "🛒",
           "title": "Big C",
-          "note": "",
+          "note": "掃手信同日用品的標準收尾位",
           "popup": true,
           "detail": "晚飯後順路掃貨，買手信及日用品最方便。建議先睇清楚想買嘅清單，減少迷路式消費。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Big%20C%20Ratchadamri%20Bangkok"
@@ -137,7 +137,7 @@
           "time": "11:30",
           "icon": "🍽️",
           "title": "Tek Heng 符德興",
-          "note": "",
+          "note": "老字號午餐，先食飽再開始走景點",
           "popup": true,
           "detail": "老城區人氣食店，可作為正式開始舊區散策前嘅午餐站。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Tek%20Heng%20Bangkok"
@@ -155,7 +155,7 @@
           "time": "14:00",
           "icon": "📸",
           "title": "Space & Time Cube+",
-          "note": "",
+          "note": "打卡景點，可預留少少影相時間",
           "popup": true,
           "detail": "以打卡及拍照為主，停留時間可彈性安排。適合拍幾張就走，保留腳力俾夜晚。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Space%20%26%20Time%20Cube%2B%20Bangkok"
@@ -173,7 +173,7 @@
           "time": "18:00",
           "icon": "🏮",
           "title": "Chinatown",
-          "note": "",
+          "note": "唐人街邊行邊食，夜晚氣氛會更好",
           "popup": true,
           "detail": "黃昏至晚上最有氣氛，適合邊行邊食邊影相。人流通常較多，財物要跟身。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Yaowarat%20Road%20Bangkok%20Chinatown"
@@ -182,7 +182,7 @@
           "time": "19:00",
           "icon": "🍽️",
           "title": "Som Som Seafood",
-          "note": "",
+          "note": "海鮮晚餐，食完可再慢慢散步",
           "popup": true,
           "detail": "夜晚喺唐人街食海鮮，作為老城區行程收尾幾好。可按現場人流決定等位與否。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Som%20Som%20Seafood%20Bangkok%20Chinatown"
@@ -200,7 +200,7 @@
           "time": "11:30",
           "icon": "🍽️",
           "title": "榮泰",
-          "note": "",
+          "note": "先食午餐，再正式進入週末市場節奏",
           "popup": true,
           "detail": "午餐先食飽再入週末市場，之後行街會輕鬆好多。綠色 highlight 已按餐廳處理。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Rong%20Tai%20Bangkok%20restaurant"
@@ -218,7 +218,7 @@
           "time": "15:00",
           "icon": "🛍️",
           "title": "JJ Market",
-          "note": "",
+          "note": "週末市場主場，建議集中火力行重點區域",
           "popup": true,
           "detail": "週末市場範圍大，建議先有目標分區，否則好容易由行程變成生存挑戰。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Chatuchak%20Weekend%20Market%20Bangkok"
@@ -236,7 +236,7 @@
           "time": "19:00",
           "icon": "🍽️",
           "title": "Boat noodle",
-          "note": "",
+          "note": "船麵作晚餐，份量通常唔大可以靈活加單",
           "popup": true,
           "detail": "晚上安排船麵，份量通常較細，可以按胃口自由加碼。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Victory%20Monument%20Boat%20Noodle%20Alley%20Bangkok"
@@ -245,7 +245,7 @@
           "time": "20:00",
           "icon": "🛍️",
           "title": "Siam",
-          "note": "",
+          "note": "夜晚繼續行街，購物選擇集中",
           "popup": true,
           "detail": "晚間回到 Siam 區購物或行街，商場集中，方便作最後一輪補貨。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Siam%20Bangkok"
@@ -263,7 +263,7 @@
           "time": "11:00",
           "icon": "🛍️",
           "title": "Icon Siam",
-          "note": "",
+          "note": "大型商場加河景位，適合慢慢行",
           "popup": true,
           "detail": "大型河畔商場，結合購物、餐飲及景觀，適合慢慢行。",
           "maps": "https://www.google.com/maps/search/?api=1&query=ICONSIAM%20Bangkok"
@@ -272,7 +272,7 @@
           "time": "12:00",
           "icon": "🍽️",
           "title": "EASY! Buddy",
-          "note": "",
+          "note": "午餐位，食完可以繼續留喺 Icon Siam",
           "popup": true,
           "detail": "中午先食，之後再繼續行 Icon Siam。可視乎人流決定先食定先行。",
           "maps": "https://www.google.com/maps/search/?api=1&query=EASY%21%20buddy%20ICONSIAM%20Bangkok"
@@ -281,7 +281,7 @@
           "time": "15:00",
           "icon": "🛍️",
           "title": "Icon Siam",
-          "note": "",
+          "note": "大型商場加河景位，適合慢慢行",
           "popup": true,
           "detail": "大型河畔商場，結合購物、餐飲及景觀，適合慢慢行。",
           "maps": "https://www.google.com/maps/search/?api=1&query=ICONSIAM%20Bangkok"
@@ -290,7 +290,7 @@
           "time": "17:00",
           "icon": "🍽️",
           "title": "Kodtalay Seafood Buffet",
-          "note": "",
+          "note": "海鮮 buffet 晚餐，建議準時入座",
           "popup": true,
           "detail": "晚餐主打海鮮 buffet，建議預留完整用餐時間，唔好再塞太多硬行程。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Kodtalay%20Seafood%20Buffet%20Bangkok"
@@ -299,7 +299,7 @@
           "time": "20:00",
           "icon": "🛒",
           "title": "Terminal 21",
-          "note": "",
+          "note": "晚飯後再行一轉，順便補買漏咗嘅嘢",
           "popup": true,
           "detail": "晚飯後再去行商場補貨，節奏會比較輕鬆，亦適合買最後一輪手信。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Terminal%2021%20Asok%20Bangkok"
@@ -317,7 +317,7 @@
           "time": "13:00",
           "icon": "🛍️",
           "title": "Siam",
-          "note": "",
+          "note": "最後購物時段，集中處理未買清單",
           "popup": true,
           "detail": "回程日前最後購物時段，可集中買未買齊嘅手信或藥妝。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Siam%20Bangkok"
