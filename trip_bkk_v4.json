@@ -86,7 +86,7 @@
           "note": "食個甜品休息一下，順便降溫",
           "popup": true,
           "detail": "中段食甜品降溫，作為 shopping break 幾合適。可當作短暫休息站。",
-          "maps": "https://www.google.com/maps/search/?api=1&query=Srinakharinwirot%20University%20Bangkok%20longan%20dessert"
+          "maps": "https://maps.app.goo.gl/o3H3h1HxyU1w3qjN9"
         },
         {
           "time": "16:30",
@@ -95,7 +95,8 @@
           "note": "按摩放鬆，幫雙腳做風險管理",
           "popup": true,
           "detail": "下午安排按摩放鬆雙腳，幫身體回一回氣，之後再食 buffet 會舒服好多。",
-          "maps": "https://www.google.com/maps/search/?api=1&query=Health%20Land%20Asoke%20Bangkok"
+          "maps": "https://www.google.com/maps/search/?api=1&query=Health%20Land%20Asoke%20Bangkok",
+          "bookingPdf": "assets/pdf/healthlandbooking.pdf"
         },
         {
           "time": "19:30",
