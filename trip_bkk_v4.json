@@ -68,7 +68,8 @@
           "note": "人氣海南雞飯，呢餐算係正式開局",
           "popup": true,
           "detail": "經典曼谷人氣雞飯，適合作為第一餐。通常午市較熱鬧，早少少到會舒服啲。",
-          "maps": "https://www.google.com/maps/search/?api=1&query=Go-Ang%20Pratunam%20Chicken%20Rice%20Bangkok"
+          "maps": "https://maps.app.goo.gl/4D32WFKd9UDHD2Rz7",
+          "gallery": "chicken"
         },
         {
           "time": "13:00",
@@ -106,7 +107,8 @@
           "popup": true,
           "detail": "人氣 buffet，建議準時到達。可預留充足用餐時間，唔好安排得太趕。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Copper%20Beyond%20Buffet%20Bangkok",
-          "bookingPdf": "assets/pdf/copperbooking.png"
+          "bookingPdf": "assets/pdf/copperbooking.png",
+          "gallery": "copper"
         },
         {
           "time": "21:00",
@@ -115,7 +117,8 @@
           "note": "掃手信同日用品的標準收尾位",
           "popup": true,
           "detail": "晚飯後順路掃貨，買手信及日用品最方便。建議先睇清楚想買嘅清單，減少迷路式消費。",
-          "maps": "https://www.google.com/maps/search/?api=1&query=Big%20C%20Ratchadamri%20Bangkok"
+          "maps": "https://www.google.com/maps/search/?api=1&query=Big%20C%20Ratchadamri%20Bangkok",
+          "gallery": "bigc"
         }
       ]
     },
@@ -142,7 +145,8 @@
           "note": "老字號午餐，先食飽再開始走景點",
           "popup": true,
           "detail": "老城區人氣食店，可作為正式開始舊區散策前嘅午餐站。",
-          "maps": "https://www.google.com/maps/search/?api=1&query=Tek%20Heng%20Bangkok"
+          "maps": "https://maps.app.goo.gl/toWxgRcsoM9DdNy69",
+          "gallery": "tek"
         },
         {
           "time": "13:00",
@@ -151,7 +155,7 @@
           "note": "前往 Space & Time Cube+",
           "popup": true,
           "detail": "由午餐地點轉場到打卡位。可視乎體力及天氣決定用 BTS、MRT 或 Call 車。",
-          "maps": "https://www.google.com/maps/search/?api=1&query=Space%20%26%20Time%20Cube%2B%20Bangkok"
+          "maps": "https://www.google.com/maps/search/?api=1&query=Space%20%26%20Time%20Cube%2B%20Bangkok",
         },
         {
           "time": "14:00",
@@ -160,7 +164,8 @@
           "note": "打卡景點，可預留少少影相時間",
           "popup": true,
           "detail": "以打卡及拍照為主，停留時間可彈性安排。適合拍幾張就走，保留腳力俾夜晚。",
-          "maps": "https://www.google.com/maps/search/?api=1&query=Space%20%26%20Time%20Cube%2B%20Bangkok"
+          "maps": "https://maps.app.goo.gl/kMSTmXbkpURA7CKaA",
+          "gallery": "space"
         },
         {
           "time": "16:00",
@@ -178,7 +183,8 @@
           "note": "唐人街邊行邊食，夜晚氣氛會更好",
           "popup": true,
           "detail": "黃昏至晚上最有氣氛，適合邊行邊食邊影相。人流通常較多，財物要跟身。",
-          "maps": "https://www.google.com/maps/search/?api=1&query=Yaowarat%20Road%20Bangkok%20Chinatown"
+          "maps": "https://www.google.com/maps/search/?api=1&query=Yaowarat%20Road%20Bangkok%20Chinatown",
+          "gallery": "chinatown"
         },
         {
           "time": "19:00",
