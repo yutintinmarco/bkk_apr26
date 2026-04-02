@@ -417,6 +417,31 @@
     "gallery": [
       "assets/galleries/snacks/003.png"
     ]
+  },
+      {
+    "title": "Smoothies Drink Healthy สาขา บรรทัดทอง",
+    "area": "朱拉（Somsom海鮮斜對面）",
+    "category": "飲品 / 甜品",
+    "must": "山竹冰沙",
+    "note": "曼谷-夏季必喝山竹冰沙開跑了",
+    "opening": "09:30-21:30",
+    "maps": "https://maps.app.goo.gl/iU7oQ7LgEiVgA7Xd7",
+    "gallery": [
+      "assets/galleries/snacks/004.png"
+    ]
+  },
+      {
+    "title": "郭炎松 Wattana Panich (วัฒนาพานิช)",
+    "area": "Ekkamai",
+    "category": "湯品 / 正餐",
+    "must": "牛肉湯",
+    "note": "最吸睛的就是那鍋不熄火藥膳湯，說什麼都要來吃一下！",
+    "opening": "09:00-19:00",
+    "maps": "https://maps.app.goo.gl/qoBYJU6CuHc1L1dw9",
+    "gallery": [
+      "assets/galleries/snacks/005.png",
+      "assets/galleries/snacks/006.png"
+    ]
   }
 ]
   }
