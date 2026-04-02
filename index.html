@@ -709,6 +709,11 @@ flex: 1;
       transform: translateY(0);
     }
 
+  
+    .title-red {
+      color: #d93025;
+    }
+
   </style>
 <link rel="apple-touch-icon" href="assets/icon/trip_icon.png" />
   <link rel="icon" type="image/png" href="assets/icon/trip_icon.png" />
@@ -1430,7 +1435,7 @@ function normalizeGallery(value) {
 
       if (data.meta) {
         if (data.meta.titleSmall && headerSmall) headerSmall.textContent = data.meta.titleSmall;
-        if (data.meta.titleMain && headerMain) headerMain.textContent = data.meta.titleMain;
+        if (data.meta.titleMain && headerMain) headerMain.innerHTML = data.meta.titleMain;
         if (headerSub) {
           const lines = [];
           if (data.meta.dateRange) {
@@ -1702,7 +1707,7 @@ contentsEl.appendChild(content);
 
     window.tripData = null;
 
-    fetch("trip_bkk_v8.json")
+    fetch("trip_bkk_v8_redtitle.json")
       .then(r => r.json())
       .then(data => {
         window.tripData = data;
