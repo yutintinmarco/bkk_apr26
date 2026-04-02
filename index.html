@@ -1113,60 +1113,13 @@ flex: 1;
       scrollShell.scrollTop = bodyScrollY || 0;
     }
 
-const GALLERIES = {
-      "Copper": [
-        "assets/galleries/Copper/001.webp",
-        "assets/galleries/Copper/002.webp",
-        "assets/galleries/Copper/003.webp",
-        "assets/galleries/Copper/004.webp"
-      ],
-      "chicken": [
-        "assets/galleries/chicken/001.jpg",
-        "assets/galleries/chicken/002.webp"
-      ],
-      "bigc": [
-        "assets/galleries/bigc/001.png"
-      ],
-      "tek": [
-        "assets/galleries/tek/001.webp",
-        "assets/galleries/tek/002.jpg",
-        "assets/galleries/tek/003.jpg"
-      ],
-     "space": [
-        "assets/galleries/space/001.jpg",
-        "assets/galleries/space/002.jpg",
-        "assets/galleries/space/003.jpg",
-        "assets/galleries/space/004.jpg"
-      ],
-     "chinatown": [
-        "assets/galleries/chinatown/001.webp",
-       "assets/galleries/chinatown/002.jpg"
-      ],
-     "takarasushi": [
-        "assets/galleries/takarasushi/takarasushi01.jpg"
-      ],
-     "outlet": [
-        "assets/galleries/outlet/outlet01.webp"
-      ],
-     "noodles": [
-        "assets/galleries/noodles/noodles.jpg",
-        "assets/galleries/noodles/noodles02.png"
-      ],
-     "bbq": [
-        "assets/galleries/bbq/bbq.jpg",
-        "assets/galleries/bbq/bbq02.jpg",
-        "assets/galleries/bbq/bbq03.jpg"
-      ],
-     "oyster": [
-        "assets/galleries/oyster/oyster01.png",
-        "assets/galleries/oyster/oyster02.png"
-      ],
-     "unicafe": [
-        "assets/galleries/unicafe/unicafe.jpg",
-        "assets/galleries/unicafe/unicafe01.jpg",
-        "assets/galleries/unicafe/unicafe02.jpg"
-      ]
-    };
+function normalizeGallery(value) {
+      if (!value) return [];
+      if (Array.isArray(value)) return value;
+      if (typeof value === "string") return [value];
+      return [];
+    }
+
 
     let currentMapsUrl = "";
     let currentDianpingUrl = "";
@@ -1212,9 +1165,8 @@ const GALLERIES = {
           const detail = item.getAttribute("data-detail") || "";
           const detailLinesRaw = item.getAttribute("data-detail-lines");
           const maps = item.getAttribute("data-maps") || "";
-          const galleryKey = item.getAttribute("data-gallery") || "";
+          const galleryRaw = item.getAttribute("data-gallery");
           const dianping = item.getAttribute("data-dianping") || "";
-          const bookingGalleryKey = item.getAttribute("data-booking-gallery") || "";
           const bookingPdf = item.getAttribute("data-booking-pdf") || "";
 
           detailTitle.textContent = title;
@@ -1236,11 +1188,12 @@ const GALLERIES = {
           lockBodyScroll();
 
           let combinedGallery = [];
-          if (galleryKey && GALLERIES[galleryKey]) {
-            combinedGallery = combinedGallery.concat(GALLERIES[galleryKey]);
-          }
-          if (bookingGalleryKey && GALLERIES[bookingGalleryKey]) {
-            combinedGallery = combinedGallery.concat(GALLERIES[bookingGalleryKey]);
+          if (galleryRaw) {
+            try {
+              combinedGallery = combinedGallery.concat(normalizeGallery(JSON.parse(galleryRaw)));
+            } catch (e) {
+              combinedGallery = combinedGallery.concat(normalizeGallery(galleryRaw));
+            }
           }
 
           if (combinedGallery.length) {
@@ -1557,16 +1510,24 @@ const GALLERIES = {
                 itemEl.setAttribute("data-detail-lines", JSON.stringify(item.detailLines));
               }
               itemEl.setAttribute("data-maps", item.maps || "");
+              const mergedGallery = [];
               if (item.gallery) {
-                itemEl.setAttribute("data-gallery", item.gallery);
+                if (Array.isArray(item.gallery)) mergedGallery.push(...item.gallery);
+                else mergedGallery.push(item.gallery);
+              }
+              if (item.booking && item.booking.gallery) {
+                if (Array.isArray(item.booking.gallery)) mergedGallery.push(...item.booking.gallery);
+                else mergedGallery.push(item.booking.gallery);
+              }
+              if (mergedGallery.length) {
+                itemEl.setAttribute("data-gallery", JSON.stringify(mergedGallery));
               }
               if (item.dianping) {
                itemEl.setAttribute("data-dianping", item.dianping);
               }
-              if (item.bookingGallery) {
-                itemEl.setAttribute("data-booking-gallery", item.bookingGallery);
-              }
-              if (item.bookingPdf) {
+              if (item.booking && item.booking.pdf) {
+                itemEl.setAttribute("data-booking-pdf", item.booking.pdf);
+              } else if (item.bookingPdf) {
                 itemEl.setAttribute("data-booking-pdf", item.bookingPdf);
               }
             }
@@ -1708,7 +1669,7 @@ contentsEl.appendChild(content);
         if (s.opening) detailLines.push("營業  " + s.opening);
         itemEl.setAttribute("data-detail-lines", JSON.stringify(detailLines.length ? detailLines : ["點擊地圖前往"]));
         itemEl.setAttribute("data-maps", s.maps || "");
-        if (s.gallery) itemEl.setAttribute("data-gallery", s.gallery);
+        if (s.gallery) itemEl.setAttribute("data-gallery", JSON.stringify(s.gallery));
 
         const iconEl = document.createElement("div");
         iconEl.className = "icon";
@@ -1741,7 +1702,7 @@ contentsEl.appendChild(content);
 
     window.tripData = null;
 
-    fetch("trip_bkk_v4.json")
+    fetch("trip_bkk_v7.json")
       .then(r => r.json())
       .then(data => {
         window.tripData = data;
