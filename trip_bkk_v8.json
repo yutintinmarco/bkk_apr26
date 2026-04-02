@@ -390,7 +390,9 @@
     "note": "IG save 位，可作甜品站或順路打卡",
     "opening": "16:00-00:00",
     "maps": "https://maps.app.goo.gl/gv1jtRUGo8a5ViWLA",
-    "gallery": []
+    "gallery": [
+      "assets/galleries/snacks/001.png"
+    ]
   },
   {
     "title": "KHIRI Thai Tea",
@@ -400,7 +402,9 @@
     "note": "主打泰奶雪冰，適合作中途降溫休息",
     "opening": "",
     "maps": "https://www.google.com/maps/search/?api=1&query=KHIRI+Thai+Tea+Bangkok",
-    "gallery": []
+    "gallery": [
+      "assets/galleries/snacks/002.png"
+    ]
   },
       {
     "title": "Kaew Boutique",
@@ -410,7 +414,9 @@
     "note": "曼谷必試35年歷史泰式香蘭煎餅",
     "opening": "",
     "maps": "https://maps.app.goo.gl/vb9MSum71KUFKye16",
-    "gallery": []
+    "gallery": [
+      "assets/galleries/snacks/003.png"
+    ]
   }
 ]
   }
