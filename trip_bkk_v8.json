@@ -381,6 +381,37 @@
   "snacks": {
     "title": "小食清單",
     "subtitle": "路過即食  不設時間",
-    "items": []
+    "items": [
+  {
+    "title": "Ice Cream Samosorn",
+    "area": "",
+    "category": "雪糕 / 甜品",
+    "must": "",
+    "note": "IG save 位，可作甜品站或順路打卡",
+    "opening": "16:00-00:00",
+    "maps": "https://maps.app.goo.gl/gv1jtRUGo8a5ViWLA",
+    "gallery": []
+  },
+  {
+    "title": "KHIRI Thai Tea",
+    "area": "",
+    "category": "泰奶 / 甜品",
+    "must": "泰奶雪冰",
+    "note": "主打泰奶雪冰，適合作中途降溫休息",
+    "opening": "",
+    "maps": "https://www.google.com/maps/search/?api=1&query=KHIRI+Thai+Tea+Bangkok",
+    "gallery": []
+  },
+      {
+    "title": "Kaew Boutique",
+    "area": "Chit Lom",
+    "category": "香蘭煎餅 / 甜品",
+    "must": "香蘭煎餅",
+    "note": "曼谷必試35年歷史泰式香蘭煎餅",
+    "opening": "",
+    "maps": "https://maps.app.goo.gl/vb9MSum71KUFKye16",
+    "gallery": []
+  }
+]
   }
 }
