@@ -1,7 +1,7 @@
 {
   "meta": {
     "titleSmall": "Relaxing Easter Trip",
-    "titleMain": "曼谷 M come 之旅",
+    "titleMain": "曼谷 <span class=\"title-red\">M come</span> 之旅",
     "dateRange": "4月2日 至 4月7日",
     "outbound": {
       "date": "4月2日",
@@ -102,7 +102,7 @@
           "detail": "下午安排按摩放鬆雙腳，幫身體回一回氣，之後再食 buffet 會舒服好多。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Health%20Land%20Asoke%20Bangkok",
           "booking": {
-           "pdf": "assets/pdf/healthlandbooking.pdf"
+            "pdf": "assets/pdf/healthlandbooking.pdf"
           }
         },
         {
@@ -120,7 +120,7 @@
             "assets/galleries/Copper/004.webp"
           ],
           "booking": {
-           "pdf": "assets/pdf/copperbooking.png"
+            "pdf": "assets/pdf/copperbooking.png"
           }
         },
         {
@@ -382,67 +382,67 @@
     "title": "小食清單",
     "subtitle": "路過即食  不設時間",
     "items": [
-  {
-    "title": "Ice Cream Samosorn",
-    "area": "",
-    "category": "雪糕 / 甜品",
-    "must": "",
-    "note": "IG save 位，可作甜品站或順路打卡",
-    "opening": "16:00-00:00",
-    "maps": "https://maps.app.goo.gl/gv1jtRUGo8a5ViWLA",
-    "gallery": [
-      "assets/galleries/snacks/001.png"
-    ]
-  },
-  {
-    "title": "KHIRI Thai Tea",
-    "area": "",
-    "category": "泰奶 / 甜品",
-    "must": "泰奶雪冰",
-    "note": "主打泰奶雪冰，適合作中途降溫休息",
-    "opening": "",
-    "maps": "https://www.google.com/maps/search/?api=1&query=KHIRI+Thai+Tea+Bangkok",
-    "gallery": [
-      "assets/galleries/snacks/002.png"
-    ]
-  },
       {
-    "title": "Kaew Boutique",
-    "area": "Chit Lom",
-    "category": "香蘭煎餅 / 甜品",
-    "must": "香蘭煎餅",
-    "note": "曼谷必試35年歷史泰式香蘭煎餅",
-    "opening": "",
-    "maps": "https://maps.app.goo.gl/vb9MSum71KUFKye16",
-    "gallery": [
-      "assets/galleries/snacks/003.png"
-    ]
-  },
+        "title": "Ice Cream Samosorn",
+        "area": "",
+        "category": "雪糕 / 甜品",
+        "must": "",
+        "note": "IG save 位，可作甜品站或順路打卡",
+        "opening": "16:00-00:00",
+        "maps": "https://maps.app.goo.gl/gv1jtRUGo8a5ViWLA",
+        "gallery": [
+          "assets/galleries/snacks/001.png"
+        ]
+      },
       {
-    "title": "Smoothies Drink Healthy สาขา บรรทัดทอง",
-    "area": "朱拉（Somsom海鮮斜對面）",
-    "category": "飲品 / 甜品",
-    "must": "山竹冰沙",
-    "note": "曼谷-夏季必喝山竹冰沙開跑了",
-    "opening": "09:30-21:30",
-    "maps": "https://maps.app.goo.gl/iU7oQ7LgEiVgA7Xd7",
-    "gallery": [
-      "assets/galleries/snacks/004.png"
-    ]
-  },
+        "title": "KHIRI Thai Tea",
+        "area": "",
+        "category": "泰奶 / 甜品",
+        "must": "泰奶雪冰",
+        "note": "主打泰奶雪冰，適合作中途降溫休息",
+        "opening": "",
+        "maps": "https://www.google.com/maps/search/?api=1&query=KHIRI+Thai+Tea+Bangkok",
+        "gallery": [
+          "assets/galleries/snacks/002.png"
+        ]
+      },
       {
-    "title": "郭炎松 Wattana Panich (วัฒนาพานิช)",
-    "area": "Ekkamai",
-    "category": "湯品 / 正餐",
-    "must": "牛肉湯",
-    "note": "最吸睛的就是那鍋不熄火藥膳湯，說什麼都要來吃一下！",
-    "opening": "09:00-19:00",
-    "maps": "https://maps.app.goo.gl/qoBYJU6CuHc1L1dw9",
-    "gallery": [
-      "assets/galleries/snacks/005.png",
-      "assets/galleries/snacks/006.png"
+        "title": "Kaew Boutique",
+        "area": "Chit Lom",
+        "category": "香蘭煎餅 / 甜品",
+        "must": "香蘭煎餅",
+        "note": "曼谷必試35年歷史泰式香蘭煎餅",
+        "opening": "",
+        "maps": "https://maps.app.goo.gl/vb9MSum71KUFKye16",
+        "gallery": [
+          "assets/galleries/snacks/003.png"
+        ]
+      },
+      {
+        "title": "Smoothies Drink Healthy สาขา บรรทัดทอง",
+        "area": "朱拉（Somsom海鮮斜對面）",
+        "category": "飲品 / 甜品",
+        "must": "山竹冰沙",
+        "note": "曼谷-夏季必喝山竹冰沙開跑了",
+        "opening": "09:30-21:30",
+        "maps": "https://maps.app.goo.gl/iU7oQ7LgEiVgA7Xd7",
+        "gallery": [
+          "assets/galleries/snacks/004.png"
+        ]
+      },
+      {
+        "title": "郭炎松 Wattana Panich (วัฒนาพานิช)",
+        "area": "Ekkamai",
+        "category": "湯品 / 正餐",
+        "must": "牛肉湯",
+        "note": "最吸睛的就是那鍋不熄火藥膳湯，說什麼都要來吃一下！",
+        "opening": "09:00-19:00",
+        "maps": "https://maps.app.goo.gl/qoBYJU6CuHc1L1dw9",
+        "gallery": [
+          "assets/galleries/snacks/005.png",
+          "assets/galleries/snacks/006.png"
+        ]
+      }
     ]
-  }
-]
   }
 }
