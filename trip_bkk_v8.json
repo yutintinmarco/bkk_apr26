@@ -101,6 +101,9 @@
           "popup": true,
           "detail": "下午安排按摩放鬆雙腳，幫身體回一回氣，之後再食 buffet 會舒服好多。",
           "maps": "https://www.google.com/maps/search/?api=1&query=Health%20Land%20Asoke%20Bangkok"
+          "booking": {
+           "pdf": "assets/pdf/healthlandbooking.pdf"
+          }
         },
         {
           "time": "19:30",
@@ -115,7 +118,10 @@
             "assets/galleries/Copper/002.webp",
             "assets/galleries/Copper/003.webp",
             "assets/galleries/Copper/004.webp"
-          ]
+          ],
+          "booking": {
+           "pdf": "assets/pdf/copperbooking.png"
+          }
         },
         {
           "time": "21:00",
