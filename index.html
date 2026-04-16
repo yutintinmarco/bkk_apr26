@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title id="page-title">行程</title>
+  <style>
+    :root {
+      --font-scale: 1;
+    }
+
+    .bg-fixed {
+      position: fixed;
+      inset: 0;
+      background: url("assets/bg/bg_trip.png") center center / cover no-repeat;
+      z-index: -1;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      background: transparent;
+      color: #111111;
+      height: 100vh;
+      overflow: hidden;
+    }
+    html {
+      background: transparent;
+    }
+    .scroll-shell {
+      height: 100vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-top: env(safe-area-inset-top);
+      background: rgba(245,245,247,0.45);
+    }
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 16px 16px 32px 16px;
+    }
+    .header {
+      margin-bottom: 10px;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .header-title-small {
+      font-size: calc(13px * var(--font-scale));
+      color: #000000;
+      margin-bottom: 2px;
+    }
+    .header-title-main {
+      font-size: calc(20px * var(--font-scale));
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .header-sub-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .header-sub-text {
+      font-size: calc(12px * var(--font-scale));
+      color: #000000;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .today-chip {
+      font-size: calc(11px * var(--font-scale));
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #f9f9fb;
+      border: 1px solid #e0e0e0;
+      color: #555555;
+      max-width: 140px;
+      text-align: right;
+      line-height: 1.4;
+      box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+    }
+    .today-chip.active {
+      border-color: #f5c542;
+      background: #fff7d1;
+      color: #5c4300;
+    }
+    .refresh-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid #dadada;
+      background: #f9f9fb;
+      font-size: calc(16px * var(--font-scale));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .refresh-btn:active {
+      background: #ececf1;
+    }
+    .font-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .font-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid #dadada;
+      background: #f9f9fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .font-btn:active {
+      background: #ececf1;
+    }
+    .status-square {
+      min-width: 120px;
+      min-height: 60px;
+      padding: 6px 10px;
+      border-radius: 14px;
+      background: #eee9f2;
+      border: 1px solid #e5e5ea;
+      box-shadow: 0 6px 14px rgba(15,23,42,0.08);
+      text-align: center;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .status-main {
+      font-size: calc(15px * var(--font-scale));
+      font-weight: 600;
+      margin-bottom: 2px;
+      color: #222222;
+    }
+    .status-sub {
+      font-size: calc(11px * var(--font-scale));
+      color: #777777;
+    }
+    .pull-indicator {
+      font-size: calc(11px * var(--font-scale));
+      color: #777777;
+      text-align: center;
+      margin-bottom: 8px;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    .pull-indicator.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card {
+      background: #eee9f2;
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 8px 20px rgba(15,23,42,0.08);
+      margin-bottom: 14px;
+      border: 1px solid #e5e5ea;
+    }
+    .trip-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: calc(12px * var(--font-scale));
+      color: #333333;
+    }
+    .trip-row-with-logo {
+      align-items: center;
+      column-gap: 10px;
+    }
+    .trip-col {
+      flex: 1;
+    }
+    .trip-col-right {
+      text-align: right;
+    }
+    .trip-logo-col {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+    }
+    .trip-logo-img {
+      max-height: 28px;
+      width: auto;
+      display: block;
+    }
+    .trip-col-title {
+      font-size: calc(11px * var(--font-scale));
+      color: #999999;
+      margin-bottom: 2px;
+    }
+    .trip-col-main {
+      font-size: calc(13px * var(--font-scale));
+    }
+    .trip-col-sub {
+      font-size: calc(11px * var(--font-scale));
+      color: #777777;
+      margin-top: 2px;
+    }
+    .weather-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .weather-title {
+      font-size: calc(13px * var(--font-scale));
+      font-weight: 600;
+    }
+    .weather-updated {
+      font-size: calc(10px * var(--font-scale));
+      color: #999999;
+    }
+    .weather-today {
+      font-size: calc(12px * var(--font-scale));
+      margin-bottom: 4px;
+      color: #333333;
+    }
+    .weather-sun {
+      font-size: calc(11px * var(--font-scale));
+      margin-bottom: 6px;
+      color: #777777;
+    }
+    .weather-days {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+    }
+    .weather-day {
+      min-width: 70px;
+      padding: 6px 8px;
+      border-radius: 10px;
+      border: 1px solid #e5e5ea;
+      background: #ffffff;
+      font-size: calc(11px * var(--font-scale));
+      text-align: center;
+    }
+    .weather-day-label {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .weather-cond {
+      margin-top: 2px;
+      color: #555555;
+    }
+    .weather-temp {
+      margin-top: 2px;
+    }
+    .day-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0 10px 0;
+    }
+    .day-tab {
+      flex: 1;
+      padding: 7px 0;
+      text-align: center;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid #dadada;
+      background: #f8f8fa;
+      color: #555555;
+    }
+    .day-tab.active {
+      background: #ffe58f;
+      border-color: #f5c542;
+      color: #111111;
+      font-weight: 600;
+    }
+    .day-content {
+      display: none;
+    }
+    .day-content.active {
+      display: block;
+    }
+    .section-title {
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #000000;
+    }
+    .section-sub {
+      font-size: calc(11px * var(--font-scale));
+      color: #000000;
+      margin-bottom: 8px;
+    }
+    .pass-badge {
+      display: inline-block;
+      margin-left: 10px;
+      padding: 3px 10px;
+      font-size: calc(11px * var(--font-scale));
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      vertical-align: middle;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .pass-jr {
+      background: rgba(0,90,180,0.12);
+      color: #004fa3;
+      border: 1px solid rgba(0,90,180,0.25);
+    }
+    .pass-hakone {
+      background: rgba(0,120,100,0.12);
+      color: #0a6a57;
+      border: 1px solid rgba(0,120,100,0.25);
+    }
+    .pass-metro {
+      background: rgba(140,0,120,0.12);
+      color: #8a006f;
+      border: 1px solid rgba(140,0,120,0.25);
+    }
+    .timeline-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 8px;
+      border-radius: 12px;
+      background: #eee9f2;
+      margin-bottom: 6px;
+      border: 1px solid #e5e5ea;
+    }
+    .timeline-item.clickable {
+      cursor: pointer;
+    }
+    .time {
+      width: 70px;
+      font-size: calc(13px * var(--font-scale));
+      color: #666666;
+      font-variant-numeric: tabular-nums;
+    }
+    .icon {
+      width: 22px;
+      font-size: calc(20px * var(--font-scale));
+      line-height: 22px;
+    }
+    .content {
+      flex: 1;
+    }
+    .content-title {
+      font-size: calc(14px * var(--font-scale));
+      margin-bottom: 2px;
+    }
+    .content-note {
+      font-size: calc(11px * var(--font-scale));
+      color: #777777;
+    }
+    .footer-note {
+      margin-top: 18px;
+      font-size: calc(10px * var(--font-scale));
+      color: #999999;
+      text-align: center;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+    .modal {
+      width: 90%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 14px 16px 12px 16px;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.3);
+    }
+    .modal-img-wrapper {
+      margin: -2px 0 8px 0;
+    }
+    .modal-img-wrapper img {
+      width: 100%;
+      border-radius: 14px;
+      display: block;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      will-change: opacity, transform;
+    }
+    .modal-img-wrapper img.fade-out {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    .modal-img-wrapper img.fade-in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .modal-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin: 4px 0 4px 0;
+    }
+    .modal-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #d0d0d4;
+    }
+    .modal-dot.active {
+      background: #111111;
+    }
+    .modal-title {
+      font-size: calc(15px * var(--font-scale));
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .modal-time {
+      font-size: calc(12px * var(--font-scale));
+      color: #777777;
+      margin-bottom: 8px;
+    }
+    .modal-body {
+      font-size: calc(13px * var(--font-scale));
+      color: #444444;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-link-btn {
+      flex: 1;
+      text-align: center;
+      padding: 7px 0;
+      border-radius: 999px;
+      border: none;
+      background: #111111;
+      color: #ffffff;
+      font-size: calc(12px * var(--font-scale));
+    }
+    .modal-close-btn {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid #dddddd;
+      background: #f9f9fb;
+      font-size: calc(12px * var(--font-scale));
+    }
+    .snack-item .time {
+      width: 0;
+      display: none;
+    }
+    .snack-item {
+      padding: 10px 10px;
+    }
+    .fab-wrap {
+      position: fixed;
+      right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom));
+      z-index: 1400;
+      display: flex;
+      align-items: flex-end;
+    }
+    .fab {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,200,205,0.9);
+      background: rgba(245,245,247,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 16px rgba(15,23,42,0.14);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      line-height: 1;
+    }
+    .fab:active { transform: translateY(1px); }
+    .fab-emoji {
+      display: block;
+      transform: translateY(0);
+    }
+    .fab-menu {
+      display: none;
+      min-width: auto;
+      padding: 8px;
+      border-radius: 18px;
+      border: 1px solid rgba(200,200,205,0.9);
+      background: rgba(245,245,247,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 16px 30px rgba(15,23,42,0.20);
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 10px);
+      transform-origin: bottom right;
+    }
+    .fab-menu.open {
+      display: flex;
+    }
+    .fab-item {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,200,205,0.9);
+      background: rgba(255,255,255,0.78);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .fab-item.active {
+      background: rgba(17,17,17,0.88);
+      border-color: rgba(17,17,17,0.88);
+    }
+
+    /* ── 通用：title-red class，顏色由 JSON meta.accentColor 控制 ── */
+    .title-accent {
+      color: var(--accent-color, #d93025);
+    }
+  </style>
+  <link rel="apple-touch-icon" href="assets/icon/trip_icon.png" />
+  <link rel="icon" type="image/png" href="assets/icon/trip_icon.png" />
+</head>
+<body>
+  <div class="bg-fixed"></div>
+
+  <div class="scroll-shell" id="scroll-shell">
+    <div class="container">
+      <div id="pull-indicator" class="pull-indicator">下拉更新行程</div>
+
+      <div class="header">
+        <div class="header-top">
+          <div>
+            <div class="header-title-small" id="header-title-small">My Trip</div>
+            <div class="header-title-main" id="header-title-main">行程</div>
+          </div>
+          <div class="header-right">
+            <div id="today-chip" class="today-chip">載入行程中…</div>
+            <div class="font-controls" aria-label="Font size controls">
+              <button class="font-btn" id="font-smaller" type="button" aria-label="Smaller text">A−</button>
+              <button class="font-btn" id="font-larger" type="button" aria-label="Larger text">A+</button>
+              <button class="refresh-btn" id="refresh-btn">⟳</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-sub-row">
+          <div class="header-sub-text" id="header-sub"></div>
+          <div class="status-square" id="status-square">
+            <div class="status-main" id="status-main"></div>
+            <div class="status-sub" id="status-sub"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 航班資訊：只在 JSON 有 outbound/inbound 時顯示 -->
+      <div class="card" id="flight-card" style="display:none;">
+        <div class="trip-row trip-row-with-logo">
+          <div class="trip-col">
+            <div class="trip-col-title">去程</div>
+            <div class="trip-col-main" id="outbound-main"></div>
+            <div class="trip-col-sub" id="outbound-sub"></div>
+          </div>
+          <div class="trip-logo-col" id="airline-logo-col" style="display:none;">
+            <img src="" alt="Airline logo" class="trip-logo-img" id="airline-logo-img" />
+          </div>
+          <div class="trip-col trip-col-right">
+            <div class="trip-col-title">回程</div>
+            <div class="trip-col-main" id="inbound-main"></div>
+            <div class="trip-col-sub" id="inbound-sub"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 天氣：只在 JSON 有 weather 設定時顯示 -->
+      <div class="card" id="weather-card" style="display:none;">
+        <div class="weather-header">
+          <div class="weather-title" id="weather-title">目的地天氣（自動更新）</div>
+          <div class="weather-updated" id="weather-updated">載入中…</div>
+        </div>
+        <div class="weather-today" id="weather-today">正在取得今日天氣…</div>
+        <div class="weather-sun" id="weather-sun"></div>
+        <div class="weather-days" id="weather-days"></div>
+      </div>
+
+      <div id="itinerary-view">
+        <div class="day-tabs" id="day-tabs"></div>
+        <div id="day-contents"></div>
+      </div>
+
+      <!-- 小食清單：只在 JSON 有 snacks 時顯示 -->
+      <div id="snacks-view" style="display:none;">
+        <div class="card">
+          <div class="weather-header">
+            <div class="weather-title" id="snacks-title">小食清單</div>
+            <div class="weather-updated" id="snacks-count"></div>
+          </div>
+          <div class="section-sub" id="snacks-subtitle" style="margin-bottom:10px;"></div>
+          <div id="snacks-list"></div>
+        </div>
+      </div>
+
+      <div class="footer-note" id="footer-note"></div>
+    </div>
+
+    <!-- FAB：snacks 有資料時才顯示切換按鈕 -->
+    <div class="fab-wrap" aria-label="快速切換">
+      <button class="fab" id="fab-toggle" type="button" aria-expanded="false" aria-controls="fab-menu">
+        <span class="fab-emoji" aria-hidden="true">⚙️</span>
+      </button>
+      <div class="fab-menu" id="fab-menu" role="menu" aria-hidden="true">
+        <button class="fab-item active" id="bt-itinerary" type="button" role="menuitem">🗓️</button>
+        <button class="fab-item" id="bt-snacks" type="button" role="menuitem" style="display:none;">🍡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="detail-backdrop">
+    <div class="modal">
+      <div class="modal-img-wrapper" id="detail-img-wrapper" style="display:none;">
+        <img id="detail-img" src="" alt="photo" />
+        <div class="modal-dots" id="detail-dots" style="display:none;"></div>
+      </div>
+      <div class="modal-title" id="detail-title">標題</div>
+      <div class="modal-time" id="detail-time">時間</div>
+      <div class="modal-body" id="detail-body">詳細內容</div>
+      <div class="modal-actions">
+        <button class="modal-link-btn" id="detail-dianping-btn" style="display:none;">在官方網頁開啟</button>
+        <button class="modal-link-btn" id="detail-booking-btn" style="display:none;">查看預訂 PDF</button>
+        <button class="modal-link-btn" id="detail-maps-btn" style="display:none;">在Google地圖開啟</button>
+        <button class="modal-close-btn" id="detail-close">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── 1. 決定載入哪個 JSON ──────────────────────────────────────────
+    // 優先順序：URL ?data=xxx.json → URL ?trip=xxx → 預設 trip.json
+    function getTripJsonUrl() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("data")) return params.get("data");
+      if (params.get("trip")) return params.get("trip") + ".json";
+      return "trip.json";
+    }
+
+    // ── 2. Refresh ────────────────────────────────────────────────────
+    document.getElementById("refresh-btn").addEventListener("click", () => {
+      window.location.reload(true);
+    });
+
+    // ── 3. Font size ──────────────────────────────────────────────────
+    const FONT_MIN = 0.85, FONT_MAX = 1.30, FONT_STEP = 0.08;
+    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+    function applyFontScale(scale) {
+      const s = clamp(scale, FONT_MIN, FONT_MAX);
+      document.documentElement.style.setProperty("--font-scale", String(s));
+      try { localStorage.setItem("trip_font_scale", String(s)); } catch(e) {}
+      return s;
+    }
+    function getSavedFontScale() {
+      try { const v = parseFloat(localStorage.getItem("trip_font_scale") || ""); if (!isNaN(v)) return v; } catch(e) {}
+      return 1;
+    }
+    let currentFontScale = applyFontScale(getSavedFontScale());
+    document.getElementById("font-smaller").addEventListener("click", () => { currentFontScale = applyFontScale(currentFontScale - FONT_STEP); });
+    document.getElementById("font-larger").addEventListener("click", () => { currentFontScale = applyFontScale(currentFontScale + FONT_STEP); });
+
+    // ── 4. Pull to refresh ────────────────────────────────────────────
+    const scrollShell = document.getElementById("scroll-shell");
+    const pullIndicator = document.getElementById("pull-indicator");
+    let pullStartY = 0, pullDistance = 0, isPulling = false;
+    const PULL_THRESHOLD = 70;
+    function getScrollTop() { return scrollShell ? scrollShell.scrollTop : (window.scrollY || 0); }
+    const touchTarget = scrollShell || window;
+    touchTarget.addEventListener("touchstart", (e) => {
+      if (getScrollTop() === 0) { isPulling = true; pullStartY = e.touches[0].clientY; pullDistance = 0; }
+      else { isPulling = false; }
+    }, { passive: true });
+    touchTarget.addEventListener("touchmove", (e) => {
+      if (!isPulling) return;
+      pullDistance = e.touches[0].clientY - pullStartY;
+      if (pullDistance > 0 && pullIndicator) {
+        pullIndicator.classList.add("show");
+        pullIndicator.textContent = pullDistance > PULL_THRESHOLD ? "釋放以更新行程" : "下拉更新行程";
+      }
+    }, { passive: true });
+    touchTarget.addEventListener("touchend", () => {
+      if (!isPulling) return;
+      if (pullDistance > PULL_THRESHOLD) { window.location.reload(true); }
+      else if (pullIndicator) { pullIndicator.classList.remove("show"); }
+      isPulling = false; pullDistance = 0;
+    }, { passive: true });
+
+    // ── 5. Weather ────────────────────────────────────────────────────
+    function getWeatherInfo(code) {
+      if (typeof code !== "number") return { icon: "☁️", label: "多雲" };
+      if (code === 0) return { icon: "☀️", label: "晴朗" };
+      if (code === 1) return { icon: "🌤️", label: "大致天晴" };
+      if (code === 2) return { icon: "⛅", label: "間有雲" };
+      if (code === 3) return { icon: "☁️", label: "多雲" };
+      if (code === 45 || code === 48) return { icon: "🌫️", label: "有霧" };
+      if ([51,53,55,56,57].includes(code)) return { icon: "🌦️", label: "毛毛雨" };
+      if ([61,63,65].includes(code)) return { icon: "🌧️", label: "有雨" };
+      if ([66,67].includes(code)) return { icon: "🌧️", label: "凍雨" };
+      if ([71,73,75].includes(code)) return { icon: "❄️", label: "下雪" };
+      if (code === 77) return { icon: "🌨️", label: "雪粒" };
+      if ([80,81,82].includes(code)) return { icon: "🌧️", label: "驟雨" };
+      if (code === 95) return { icon: "⛈️", label: "雷暴" };
+      if ([96,99].includes(code)) return { icon: "⛈️", label: "雷暴伴冰雹" };
+      return { icon: "☁️", label: "多雲" };
+    }
+    function formatDateMMDD(iso) { return iso.slice(5).replace("-", "/"); }
+
+    function renderWeather(data) {
+      const weatherMeta = data?.meta?.weather;
+      if (!weatherMeta || typeof weatherMeta.latitude !== "number") return;
+
+      document.getElementById("weather-card").style.display = "block";
+      const weatherTitleEl = document.getElementById("weather-title");
+      if (weatherMeta.title && weatherTitleEl) weatherTitleEl.textContent = weatherMeta.title;
+
+      const { latitude, longitude, timezone = "UTC" } = weatherMeta;
+      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${encodeURIComponent(timezone)}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset`;
+
+      fetch(weatherUrl).then(r => r.json()).then(wd => {
+        if (!wd.daily) { document.getElementById("weather-today").textContent = "暫時無法取得天氣資料"; return; }
+        const { time: dates, temperature_2m_max: maxT, temperature_2m_min: minT, sunrise, sunset, weathercode: codes } = wd.daily;
+        const todayInfo = getWeatherInfo(codes[0]);
+        document.getElementById("weather-today").textContent = `今日（${formatDateMMDD(dates[0])}）  ${todayInfo.icon} ${todayInfo.label}  高 ${Math.round(maxT[0])}°C  低 ${Math.round(minT[0])}°C`;
+        const srTime = new Date(sunrise[0]).toTimeString().slice(0, 5);
+        const ssTime = new Date(sunset[0]).toTimeString().slice(0, 5);
+        document.getElementById("weather-sun").textContent = `日出 ${srTime}  日落 ${ssTime}`;
+        const now = new Date();
+        document.getElementById("weather-updated").textContent = `更新時間 ${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
+
+        const tripDates = (data.days || []).filter(d => d.isoDate).map(d => formatDateMMDD(d.isoDate));
+        const weatherDaysEl = document.getElementById("weather-days");
+        weatherDaysEl.innerHTML = "";
+        dates.forEach((d, i) => {
+          const label = formatDateMMDD(d);
+          if (tripDates.length && !tripDates.includes(label)) return;
+          const card = document.createElement("div"); card.className = "weather-day";
+          const lbl = document.createElement("div"); lbl.className = "weather-day-label"; lbl.textContent = label;
+          const info = getWeatherInfo(codes[i]);
+          const cond = document.createElement("div"); cond.className = "weather-cond"; cond.textContent = `${info.icon} ${info.label}`;
+          const temp = document.createElement("div"); temp.className = "weather-temp"; temp.textContent = `高 ${Math.round(maxT[i])}°  低 ${Math.round(minT[i])}°`;
+          card.append(lbl, cond, temp);
+          weatherDaysEl.appendChild(card);
+        });
+        if (!weatherDaysEl.hasChildNodes()) {
+          const info = document.createElement("div"); info.style.cssText = "font-size:11px;color:#777777;";
+          info.textContent = "預報暫未覆蓋行程日期，開行程前幾日再查看。";
+          weatherDaysEl.appendChild(info);
+        }
+      }).catch(() => { document.getElementById("weather-today").textContent = "暫時無法連線到天氣服務"; });
+    }
+
+    // ── 6. Modal ──────────────────────────────────────────────────────
+    const detailBackdrop = document.getElementById("detail-backdrop");
+    const detailTitle = document.getElementById("detail-title");
+    const detailTime = document.getElementById("detail-time");
+    const detailBody = document.getElementById("detail-body");
+    const detailClose = document.getElementById("detail-close");
+    const detailMapsBtn = document.getElementById("detail-maps-btn");
+    const detailBookingBtn = document.getElementById("detail-booking-btn");
+    const detailImgWrapper = document.getElementById("detail-img-wrapper");
+    const detailImg = document.getElementById("detail-img");
+    const detailDots = document.getElementById("detail-dots");
+    const detailDianpingBtn = document.getElementById("detail-dianping-btn");
+
+    let bodyScrollY = 0;
+    function lockBodyScroll() { if (!scrollShell) return; bodyScrollY = scrollShell.scrollTop || 0; scrollShell.style.overflowY = "hidden"; }
+    function unlockBodyScroll() { if (!scrollShell) return; scrollShell.style.overflowY = "auto"; scrollShell.scrollTop = bodyScrollY || 0; }
+    function normalizeGallery(value) { if (!value) return []; if (Array.isArray(value)) return value; if (typeof value === "string") return [value]; return []; }
+
+    let currentMapsUrl = "", currentDianpingUrl = "", currentBookingUrl = "";
+    let currentGallery = [], currentGalleryIndex = 0;
+
+    function renderDots() {
+      detailDots.innerHTML = "";
+      currentGallery.forEach((_, idx) => {
+        const dot = document.createElement("div");
+        dot.className = "modal-dot" + (idx === currentGalleryIndex ? " active" : "");
+        dot.addEventListener("click", () => { currentGalleryIndex = idx; updateGalleryImage(); });
+        detailDots.appendChild(dot);
+      });
+    }
+
+    function updateGalleryImage() {
+      if (!currentGallery.length) return;
+      detailImg.classList.remove("fade-in"); detailImg.classList.add("fade-out");
+      setTimeout(() => {
+        detailImg.src = currentGallery[currentGalleryIndex];
+        renderDots();
+        detailImg.classList.remove("fade-out"); detailImg.classList.add("fade-in");
+        setTimeout(() => { detailImg.classList.remove("fade-in"); }, 220);
+      }, 120);
+    }
+
+    function setupTimelineClickHandlers() {
+      document.querySelectorAll(".timeline-item.clickable").forEach(item => {
+        item.addEventListener("click", () => {
+          const title = item.getAttribute("data-title") || "";
+          const time = item.getAttribute("data-time") || "";
+          const detail = item.getAttribute("data-detail") || "";
+          const detailLinesRaw = item.getAttribute("data-detail-lines");
+          const maps = item.getAttribute("data-maps") || "";
+          const galleryRaw = item.getAttribute("data-gallery");
+          const dianping = item.getAttribute("data-dianping") || "";
+          const bookingPdf = item.getAttribute("data-booking-pdf") || "";
+
+          detailTitle.textContent = title;
+          detailTime.textContent = time;
+          if (detailLinesRaw) {
+            try { const lines = JSON.parse(detailLinesRaw); detailBody.innerHTML = lines.map(l => `<div>${l}</div>`).join(""); }
+            catch(e) { detailBody.textContent = detail; }
+          } else { detailBody.textContent = detail; }
+
+          currentMapsUrl = maps; currentDianpingUrl = dianping; currentBookingUrl = bookingPdf;
+          detailBackdrop.classList.add("active"); lockBodyScroll();
+
+          let combinedGallery = [];
+          if (galleryRaw) { try { combinedGallery = combinedGallery.concat(normalizeGallery(JSON.parse(galleryRaw))); } catch(e) { combinedGallery = combinedGallery.concat(normalizeGallery(galleryRaw)); } }
+
+          if (combinedGallery.length) {
+            currentGallery = combinedGallery.slice(); currentGalleryIndex = 0;
+            detailImgWrapper.style.display = "block"; detailDots.style.display = "flex";
+            updateGalleryImage();
+          } else {
+            currentGallery = []; detailImgWrapper.style.display = "none"; detailDots.style.display = "none"; detailImg.src = "";
+          }
+
+          detailMapsBtn.style.display = maps ? "inline-block" : "none";
+          detailDianpingBtn.style.display = dianping ? "inline-block" : "none";
+          detailBookingBtn.style.display = bookingPdf ? "inline-block" : "none";
+        });
+      });
+    }
+
+    // Swipe gallery
+    let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
+    const SWIPE_THRESHOLD = 40;
+    if (detailImgWrapper) {
+      detailImgWrapper.addEventListener("touchstart", (e) => { if (!e.touches?.length) return; touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; touchEndX = touchStartX; touchEndY = touchStartY; }, { passive: true });
+      detailImgWrapper.addEventListener("touchmove", (e) => { if (!e.touches?.length) return; touchEndX = e.touches[0].clientX; touchEndY = e.touches[0].clientY; }, { passive: true });
+      detailImgWrapper.addEventListener("touchend", () => {
+        const diffX = touchEndX - touchStartX, diffY = touchEndY - touchStartY;
+        if (Math.abs(diffX) < SWIPE_THRESHOLD || Math.abs(diffX) <= Math.abs(diffY)) return;
+        if (!currentGallery?.length) return;
+        currentGalleryIndex = diffX < 0 ? (currentGalleryIndex + 1) % currentGallery.length : (currentGalleryIndex - 1 + currentGallery.length) % currentGallery.length;
+        updateGalleryImage();
+      });
+    }
+    detailImg.addEventListener("click", (e) => {
+      if (!currentGallery?.length) return;
+      const rect = detailImg.getBoundingClientRect();
+      currentGalleryIndex = (e.clientX - rect.left) < rect.width / 2 ? (currentGalleryIndex - 1 + currentGallery.length) % currentGallery.length : (currentGalleryIndex + 1) % currentGallery.length;
+      updateGalleryImage();
+    });
+
+    detailClose.addEventListener("click", () => { detailBackdrop.classList.remove("active"); unlockBodyScroll(); });
+    detailBackdrop.addEventListener("click", e => { if (e.target === detailBackdrop) { detailBackdrop.classList.remove("active"); unlockBodyScroll(); } });
+    detailBackdrop.addEventListener("touchmove", (e) => { e.preventDefault(); }, { passive: false });
+    detailMapsBtn.addEventListener("click", () => { if (currentMapsUrl) window.open(currentMapsUrl, "_blank"); });
+    detailDianpingBtn.addEventListener("click", () => { if (currentDianpingUrl) window.open(currentDianpingUrl, "_blank"); });
+    detailBookingBtn.addEventListener("click", () => { if (currentBookingUrl) window.open(currentBookingUrl, "_blank"); });
+
+    // ── 7. Today chip + status ────────────────────────────────────────
+    function getDateStringInTimezone(timezone) {
+      try { return new Intl.DateTimeFormat("en-CA", { timeZone: timezone || "UTC", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date()); }
+      catch(e) { return new Date().toISOString().slice(0, 10); }
+    }
+
+    function updateTodayChipAndStatus(data) {
+      const chip = document.getElementById("today-chip");
+      const statusSquare = document.getElementById("status-square");
+      const statusMain = document.getElementById("status-main");
+      const statusSub = document.getElementById("status-sub");
+      if (!data.days?.length || !chip || !statusSquare) return;
+
+      const tz = data.meta?.weather?.timezone || "UTC";
+      const tzLabel = data.meta?.weather?.timezoneLabel || "當地時間";
+      const todayIso = getDateStringInTimezone(tz);
+      const startIso = data.meta?.tripStartIso;
+      const endIso = data.meta?.tripEndIso;
+
+      let todayIndex = -1;
+      data.days.forEach((day, idx) => { if (day.isoDate === todayIso) todayIndex = idx; });
+
+      function diffInDays(a, b) { return Math.round((new Date(b) - new Date(a)) / 86400000); }
+      function hideSquare() { statusSquare.style.display = "none"; }
+      function showSquare(main, sub) { statusSquare.style.display = "flex"; if (statusMain) statusMain.textContent = main; if (statusSub) statusSub.textContent = sub || ""; }
+
+      if (todayIndex >= 0) {
+        const day = data.days[todayIndex];
+        let passClass = "";
+        if (day.pass) {
+          if (String(day.pass).includes("JR")) passClass = "pass-jr";
+          else if (String(day.pass).includes("箱根")) passClass = "pass-hakone";
+          else if (String(day.pass).includes("地鐵")) passClass = "pass-metro";
+        }
+        chip.innerHTML = `今日  Day ${todayIndex + 1}（${day.date}）` + (day.pass ? `<br/><span class="pass-badge ${passClass}" style="margin-left:0;margin-top:4px;">${day.pass}</span>` : "");
+        chip.classList.add("active"); hideSquare();
+
+        const tabs = document.querySelectorAll(".day-tab");
+        const dayContents = document.querySelectorAll(".day-content");
+        tabs.forEach(t => t.classList.remove("active")); dayContents.forEach(d => d.classList.remove("active"));
+        const activeTab = document.querySelector(`.day-tab[data-day-index="${todayIndex}"]`);
+        const activeContent = document.querySelector(`.day-content[data-day-index="${todayIndex}"]`);
+        if (activeTab) activeTab.classList.add("active");
+        if (activeContent) activeContent.classList.add("active");
+        if (scrollShell) scrollShell.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (startIso && todayIso < startIso) {
+        const daysToGo = diffInDays(todayIso, startIso);
+        chip.textContent = "尚未出發"; chip.classList.remove("active");
+        showSquare(`距離出發尚餘 ${daysToGo} 日`, `以${tzLabel}計算`);
+      } else if (endIso && todayIso > endIso) {
+        chip.textContent = "行程已完成"; chip.classList.remove("active");
+        showSquare("行程已完成", "多謝自己好好玩返轉");
+      } else {
+        chip.textContent = "行程日期以外"; chip.classList.remove("active");
+        showSquare("不在行程日期內", "請確認行程日期設定");
+      }
+    }
+
+    // ── 8. Snacks ─────────────────────────────────────────────────────
+    function renderSnacks(data) {
+      const listEl = document.getElementById("snacks-list");
+      const countEl = document.getElementById("snacks-count");
+      const snacksTitleEl = document.getElementById("snacks-title");
+      const snacksSubtitleEl = document.getElementById("snacks-subtitle");
+      if (!listEl) return;
+
+      const snacksMeta = data.snacks;
+      if (!snacksMeta || !Array.isArray(snacksMeta.items) || !snacksMeta.items.length) return;
+
+      // 有 snacks，顯示 FAB snacks 按鈕
+      const btSnacks = document.getElementById("bt-snacks");
+      if (btSnacks) btSnacks.style.display = "flex";
+
+      if (snacksMeta.title && snacksTitleEl) snacksTitleEl.textContent = snacksMeta.title;
+      if (snacksMeta.subtitle && snacksSubtitleEl) snacksSubtitleEl.textContent = snacksMeta.subtitle;
+      if (countEl) countEl.textContent = `共 ${snacksMeta.items.length} 項`;
+
+      listEl.innerHTML = "";
+      snacksMeta.items.forEach(s => {
+        const itemEl = document.createElement("div");
+        itemEl.className = "timeline-item snack-item clickable";
+        itemEl.setAttribute("data-title", s.title || "");
+        itemEl.setAttribute("data-time", (s.area ? s.area : "") + (s.category ? `  ${s.category}` : ""));
+        const detailLines = [];
+        if (s.must) detailLines.push(`必點  ${s.must}`);
+        if (s.note) detailLines.push(s.note);
+        if (s.opening) detailLines.push(`營業  ${s.opening}`);
+        itemEl.setAttribute("data-detail-lines", JSON.stringify(detailLines.length ? detailLines : ["點擊地圖前往"]));
+        itemEl.setAttribute("data-maps", s.maps || "");
+        if (s.gallery) itemEl.setAttribute("data-gallery", JSON.stringify(s.gallery));
+
+        const iconEl = document.createElement("div"); iconEl.className = "icon"; iconEl.textContent = s.icon || "🍡";
+        const contentWrap = document.createElement("div"); contentWrap.className = "content";
+        const contentTitle = document.createElement("div"); contentTitle.className = "content-title"; contentTitle.textContent = s.title || "";
+        const contentNote = document.createElement("div"); contentNote.className = "content-note"; contentNote.textContent = (s.area ? s.area + "  " : "") + (s.category || "");
+        contentWrap.appendChild(contentTitle);
+        if (contentNote.textContent) contentWrap.appendChild(contentNote);
+        itemEl.append(iconEl, contentWrap);
+        listEl.appendChild(itemEl);
+      });
+      setupTimelineClickHandlers();
+    }
+
+    // ── 9. Main render ────────────────────────────────────────────────
+    function renderFromTripJson(data) {
+      // Accent colour (optional, default red)
+      if (data.meta?.accentColor) {
+        document.documentElement.style.setProperty("--accent-color", data.meta.accentColor);
+      }
+
+      // Page title
+      const rawTitle = data.meta?.titleMain?.replace(/<[^>]*>/g, "") || "行程";
+      document.getElementById("page-title").textContent = rawTitle;
+
+      // Header
+      const headerSmall = document.getElementById("header-title-small");
+      const headerMain = document.getElementById("header-title-main");
+      const headerSub = document.getElementById("header-sub");
+      if (data.meta?.titleSmall && headerSmall) headerSmall.textContent = data.meta.titleSmall;
+      if (data.meta?.titleMain && headerMain) headerMain.innerHTML = data.meta.titleMain;
+      if (headerSub) {
+        const lines = [];
+        if (data.meta?.dateRange) lines.push("旅程日期  " + data.meta.dateRange);
+        if (data.meta?.outbound) lines.push(`去程 ${data.meta.outbound.flight}  ${data.meta.outbound.route}  ${data.meta.outbound.time}`);
+        if (data.meta?.inbound) lines.push(`回程 ${data.meta.inbound.flight}  ${data.meta.inbound.route}  ${data.meta.inbound.time}`);
+        headerSub.innerHTML = lines.join("<br/>");
+      }
+
+      // Flight card
+      if (data.meta?.outbound || data.meta?.inbound) {
+        document.getElementById("flight-card").style.display = "block";
+        if (data.meta.outbound) {
+          document.getElementById("outbound-main").textContent = `${data.meta.outbound.date}  ${data.meta.outbound.flight}`;
+          document.getElementById("outbound-sub").textContent = `${data.meta.outbound.route}  ${data.meta.outbound.time}`;
+        }
+        if (data.meta.inbound) {
+          document.getElementById("inbound-main").textContent = `${data.meta.inbound.date}  ${data.meta.inbound.flight}`;
+          document.getElementById("inbound-sub").textContent = `${data.meta.inbound.route}  ${data.meta.inbound.time}`;
+        }
+        // Airline logo (optional)
+        if (data.meta.airlineLogo) {
+          const logoCol = document.getElementById("airline-logo-col");
+          const logoImg = document.getElementById("airline-logo-img");
+          logoImg.src = data.meta.airlineLogo;
+          logoCol.style.display = "flex";
+        }
+      }
+
+      // Footer
+      if (data.meta?.footerNote) document.getElementById("footer-note").textContent = data.meta.footerNote;
+
+      // Days
+      const tabsEl = document.getElementById("day-tabs");
+      const contentsEl = document.getElementById("day-contents");
+      tabsEl.innerHTML = ""; contentsEl.innerHTML = "";
+
+      if (!data.days?.length) return;
+
+      data.days.forEach((day, index) => {
+        const tab = document.createElement("button");
+        tab.className = "day-tab" + (index === 0 ? " active" : "");
+        tab.dataset.dayIndex = String(index);
+        tab.textContent = day.label || ("Day " + (index + 1));
+        tabsEl.appendChild(tab);
+
+        const content = document.createElement("div");
+        content.className = "day-content" + (index === 0 ? " active" : "");
+        content.dataset.dayIndex = String(index);
+
+        const titleEl = document.createElement("div"); titleEl.className = "section-title";
+        titleEl.textContent = (day.date ? day.date + "  " : "") + (day.title || "");
+        if (day.pass) {
+          const badge = document.createElement("span"); badge.classList.add("pass-badge");
+          if (String(day.pass).includes("JR")) badge.classList.add("pass-jr");
+          else if (String(day.pass).includes("箱根")) badge.classList.add("pass-hakone");
+          else if (String(day.pass).includes("地鐵")) badge.classList.add("pass-metro");
+          badge.textContent = day.pass; titleEl.appendChild(badge);
+        }
+        content.appendChild(titleEl);
+
+        if (day.subtitle) { const subEl = document.createElement("div"); subEl.className = "section-sub"; subEl.textContent = day.subtitle; content.appendChild(subEl); }
+
+        if (day.items?.length) {
+          day.items.forEach(item => {
+            const itemEl = document.createElement("div"); itemEl.className = "timeline-item";
+            if (item.popup) {
+              itemEl.classList.add("clickable");
+              itemEl.setAttribute("data-title", item.title || "");
+              itemEl.setAttribute("data-time", item.time || "");
+              itemEl.setAttribute("data-detail", item.detail || "");
+              if (item.detailLines) itemEl.setAttribute("data-detail-lines", JSON.stringify(item.detailLines));
+              itemEl.setAttribute("data-maps", item.maps || "");
+              const mergedGallery = [];
+              if (item.gallery) { if (Array.isArray(item.gallery)) mergedGallery.push(...item.gallery); else mergedGallery.push(item.gallery); }
+              if (item.booking?.gallery) { if (Array.isArray(item.booking.gallery)) mergedGallery.push(...item.booking.gallery); else mergedGallery.push(item.booking.gallery); }
+              if (mergedGallery.length) itemEl.setAttribute("data-gallery", JSON.stringify(mergedGallery));
+              if (item.dianping) itemEl.setAttribute("data-dianping", item.dianping);
+              if (item.booking?.pdf) itemEl.setAttribute("data-booking-pdf", item.booking.pdf);
+              else if (item.bookingPdf) itemEl.setAttribute("data-booking-pdf", item.bookingPdf);
+            }
+            const timeEl = document.createElement("div"); timeEl.className = "time"; timeEl.textContent = item.time || "";
+            const iconEl = document.createElement("div"); iconEl.className = "icon"; iconEl.textContent = item.icon || "";
+            const contentWrap = document.createElement("div"); contentWrap.className = "content";
+            const contentTitle = document.createElement("div"); contentTitle.className = "content-title"; contentTitle.textContent = item.title || "";
+            const contentNote = document.createElement("div"); contentNote.className = "content-note"; contentNote.textContent = item.note || "";
+            contentWrap.appendChild(contentTitle);
+            if (item.note) contentWrap.appendChild(contentNote);
+            itemEl.append(timeEl, iconEl, contentWrap);
+            content.appendChild(itemEl);
+          });
+        }
+        contentsEl.appendChild(content);
+      });
+
+      // Tab click
+      const tabs = document.querySelectorAll(".day-tab");
+      const dayContents = document.querySelectorAll(".day-content");
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(t => t.classList.remove("active")); dayContents.forEach(d => d.classList.remove("active"));
+          tab.classList.add("active");
+          const activeContent = document.querySelector(`.day-content[data-day-index="${tab.dataset.dayIndex}"]`);
+          if (activeContent) activeContent.classList.add("active");
+          if (scrollShell) scrollShell.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      setupTimelineClickHandlers();
+      renderSnacks(data);
+      updateTodayChipAndStatus(data);
+    }
+
+    // ── 10. FAB ───────────────────────────────────────────────────────
+    const btItinerary = document.getElementById("bt-itinerary");
+    const btSnacks = document.getElementById("bt-snacks");
+    const itineraryView = document.getElementById("itinerary-view");
+    const snacksView = document.getElementById("snacks-view");
+
+    function setBottomTab(active) {
+      if (!btItinerary || !btSnacks || !itineraryView || !snacksView) return;
+      if (active === "snacks") {
+        btItinerary.classList.remove("active"); btSnacks.classList.add("active");
+        itineraryView.style.display = "none"; snacksView.style.display = "block";
+      } else {
+        btSnacks.classList.remove("active"); btItinerary.classList.add("active");
+        snacksView.style.display = "none"; itineraryView.style.display = "block";
+      }
+      if (scrollShell) scrollShell.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    btItinerary.addEventListener("click", () => setBottomTab("itinerary"));
+    btSnacks.addEventListener("click", () => setBottomTab("snacks"));
+
+    const fabToggle = document.getElementById("fab-toggle");
+    const fabMenu = document.getElementById("fab-menu");
+    function closeFabMenu() { fabMenu?.classList.remove("open"); fabMenu?.setAttribute("aria-hidden", "true"); fabToggle?.setAttribute("aria-expanded", "false"); }
+    function toggleFabMenu() { const isOpen = fabMenu?.classList.toggle("open"); fabMenu?.setAttribute("aria-hidden", isOpen ? "false" : "true"); fabToggle?.setAttribute("aria-expanded", isOpen ? "true" : "false"); }
+    fabToggle?.addEventListener("click", (e) => { e.stopPropagation(); toggleFabMenu(); });
+    document.addEventListener("click", () => closeFabMenu(), { passive: true });
+    document.addEventListener("scroll", () => closeFabMenu(), { passive: true });
+
+    // ── 11. 載入 JSON ─────────────────────────────────────────────────
+    window.tripData = null;
+    fetch(getTripJsonUrl())
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(data => {
+        window.tripData = data;
+        renderFromTripJson(data);
+        renderWeather(data);
+      })
+      .catch(() => {
+        const chip = document.getElementById("today-chip");
+        if (chip) chip.textContent = "無法載入行程資料";
+        document.getElementById("header-title-main").textContent = "無法載入行程資料";
+      });
+  </script>
+</body>
+</html>
